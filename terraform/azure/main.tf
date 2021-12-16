@@ -19,7 +19,20 @@ provider "azurerm" {
 data "azurerm_resource_group" "rg" {
   name = var.RESOURCE_GROUP_NAME
 }
-
+data "azurerm_client_config" "current" {
+}
+output "clientid" {
+  value = data.azurerm_client_config.current.client_id
+}
+output "tenantid" {
+  value = data.azurerm_client_config.current.tenant_id
+}
+output "subscriptionid" {
+  value = data.azurerm_client_config.current.subscription_id
+}
+output "objectid" {
+  value = data.azurerm_client_config.current.object_id
+}
 # output "azurerm_resource_group" {
 #   value = "${data.azurerm_resource_group.rg.name}"
 # }
