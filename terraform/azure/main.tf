@@ -1,23 +1,23 @@
 # We strongly recommend using the required_providers block to set the
 # Azure Provider source and version being used
 terraform {
-	required_providers {
-		azurerm = {
-			source  = "hashicorp/azurerm"
-			version = "=2.65.0"
-		}
-	}
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "=2.65.0"
+    }
+  }
 }
 
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
-  	skip_provider_registration = "true"
-    subscription_id            = "${var.azure_subscription_id}"
+  skip_provider_registration = "true"
+  subscription_id            = var.azure_subscription_id
   features {}
 }
 
 data "azurerm_resource_group" "rg" {
-  name = "${var.resource_group}"
+  name = var.resource_group
 }
 
 # output "azurerm_resource_group" {
@@ -29,7 +29,7 @@ resource "azurerm_container_registry" "acr" {
   resource_group_name = var.resource_group
   location            = var.location
   sku                 = "Basic"
-  tags = var.mainTags
+  tags                = var.mainTags
 }
 
 resource "azurerm_log_analytics_workspace" "law" {
@@ -58,11 +58,11 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 
   tags = var.mainTags
-  
+
   addon_profile {
-	oms_agent {
-      enabled = true
-	  log_analytics_workspace_id = azurerm_log_analytics_workspace.law.id
+    oms_agent {
+      enabled                    = true
+      log_analytics_workspace_id = azurerm_log_analytics_workspace.law.id
     }
   }
 }
@@ -71,5 +71,5 @@ resource "azurerm_kubernetes_cluster" "aks" {
 resource "azurerm_role_assignment" "aks_to_acr" {
   scope                = azurerm_container_registry.acr.id
   role_definition_name = "AcrPull"
-  principal_id = azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
+  principal_id         = azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
 }
