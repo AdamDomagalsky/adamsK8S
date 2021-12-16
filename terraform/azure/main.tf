@@ -20,9 +20,9 @@ data "azurerm_resource_group" "rg" {
   name = "${var.resource_group}"
 }
 
-output "azurerm_resource_group" {
-  value = "${data.azurerm_resource_group.rg.name}"
-}
+# output "azurerm_resource_group" {
+#   value = "${data.azurerm_resource_group.rg.name}"
+# }
 
 resource "azurerm_container_registry" "acr" {
   name                = "acr${var.uniqName}"
@@ -38,6 +38,8 @@ resource "azurerm_log_analytics_workspace" "law" {
   resource_group_name = var.resource_group
 }
 
+
+
 resource "azurerm_kubernetes_cluster" "aks" {
   name                = "aks-${var.uniqName}"
   location            = var.location
@@ -49,6 +51,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     node_count = 1
     vm_size    = "Standard_D2_v2"
   }
+
 
   identity {
     type = "SystemAssigned"
