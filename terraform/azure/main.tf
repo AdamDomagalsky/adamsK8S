@@ -15,7 +15,9 @@ provider "azurerm" {
   subscription_id            = var.AZURE_SUBSCRIPTION_ID
   features {}
 }
-
+# resource "azurerm_resource_group" "AZ-RG-MW-Sandbox-01" {
+#   # (resource arguments)
+# }
 data "azurerm_resource_group" "rg" {
   name = var.RESOURCE_GROUP_NAME
 }
