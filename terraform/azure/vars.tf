@@ -26,4 +26,7 @@ variable "UNIQ_NAME" {
 variable "MAIN_TAGS" {
   type        = map(string)
   description = "Tags to be added in all resources"
+  default = {
+    who = "Me"
+  }
 }
