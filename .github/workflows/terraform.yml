@@ -18,6 +18,13 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
+      TF_VAR_AZURE_SUBSCRIPTION_ID: ${{ secrets.TF_VAR_AZURE_SUBSCRIPTION_ID }}
+      TF_VAR_DNS_PREFIX : ${{ secrets.TF_VAR_DNS_PREFIX }}
+      TF_VAR_ENV : ${{ secrets.TF_VAR_ENV }}
+      TF_VAR_LOCATION : ${{ secrets.TF_VAR_LOCATION }}
+      TF_VAR_MAIN_TAGS : ${{ secrets.TF_VAR_MAIN_TAGS }}
+      TF_VAR_RESOURCE_GROUP : ${{ secrets.TF_VAR_RESOURCE_GROUP }}
+      TF_VAR_UNIQ_NAME : ${{ secrets.TF_VAR_UNIQ_NAME }}
     runs-on: ubuntu-latest
     environment: production
  
