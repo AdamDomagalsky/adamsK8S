@@ -1,29 +1,29 @@
-variable "azure_subscription_id" {
+variable "AZURE_SUBSCRIPTION_ID" {
   type = string
 }
 
-variable "resource_group" {
+variable "RESOURCE_GROUP_NAME" {
   type = string
 }
 
-variable "location" {
+variable "LOCATION" {
   type = string
 }
 
-variable "dns_prefix" {
+variable "DNS_PREFIX" {
   type = string
 }
 
-variable "env" {
+variable "ENV" {
   type = string
 }
 
-variable "uniqName" {
+variable "UNIQ_NAME" {
   type        = string
   description = "Some of resources must have unique names in global scope"
 }
 
-variable "mainTags" {
+variable "MAIN_TAGS" {
   type        = map(string)
   description = "Tags to be added in all resources"
 }

@@ -12,12 +12,12 @@ terraform {
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
   skip_provider_registration = "true"
-  subscription_id            = var.azure_subscription_id
+  subscription_id            = var.AZURE_SUBSCRIPTION_ID
   features {}
 }
 
 data "azurerm_resource_group" "rg" {
-  name = var.resource_group
+  name = var.RESOURCE_GROUP_NAME
 }
 
 # output "azurerm_resource_group" {
@@ -25,26 +25,26 @@ data "azurerm_resource_group" "rg" {
 # }
 
 resource "azurerm_container_registry" "acr" {
-  name                = "acr${var.uniqName}"
-  resource_group_name = var.resource_group
-  location            = var.location
+  name                = "acr${var.UNIQ_NAME}"
+  resource_group_name = var.RESOURCE_GROUP_NAME
+  location            = var.LOCATION
   sku                 = "Basic"
-  tags                = var.mainTags
+  tags                = var.MAIN_TAGS
 }
 
 resource "azurerm_log_analytics_workspace" "law" {
-  name                = "law-${var.uniqName}"
-  location            = var.location
-  resource_group_name = var.resource_group
+  name                = "law-${var.UNIQ_NAME}"
+  location            = var.LOCATION
+  resource_group_name = var.RESOURCE_GROUP_NAME
 }
 
 
 
 resource "azurerm_kubernetes_cluster" "aks" {
-  name                = "aks-${var.uniqName}"
-  location            = var.location
-  resource_group_name = var.resource_group
-  dns_prefix          = var.dns_prefix
+  name                = "aks-${var.UNIQ_NAME}"
+  location            = var.LOCATION
+  resource_group_name = var.RESOURCE_GROUP_NAME
+  dns_prefix          = var.DNS_PREFIX
 
   default_node_pool {
     name       = "default"
@@ -57,7 +57,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     type = "SystemAssigned"
   }
 
-  tags = var.mainTags
+  tags = var.MAIN_TAGS
 
   addon_profile {
     oms_agent {

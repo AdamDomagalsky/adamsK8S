@@ -3,5 +3,5 @@ output "azurerm_resource_group" {
 }
 
 output "uniqName" {
-  value = var.uniqName
+  value = var.UNIQ_NAME
 }
