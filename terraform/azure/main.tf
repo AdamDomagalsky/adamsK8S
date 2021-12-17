@@ -21,13 +21,16 @@ resource "azurerm_resource_group" "AZ-RG-MW-Sandbox-01" {
   name     = var.RESOURCE_GROUP_NAME
   location = var.LOCATION
   tags     = var.MAIN_TAGS
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }
 data "azurerm_resource_group" "rg" {
   name = var.RESOURCE_GROUP_NAME
 }
 data "azurerm_client_config" "current" {
 }
-resource "azurerm_container_registry" "acr" {
+resource "azurerm_container_registry" "acrAdams" {
   name                = "acr${var.UNIQ_NAME}"
   resource_group_name = var.RESOURCE_GROUP_NAME
   location            = var.LOCATION
@@ -35,14 +38,17 @@ resource "azurerm_container_registry" "acr" {
   tags                = var.MAIN_TAGS
 }
 
-resource "azurerm_log_analytics_workspace" "law" {
-  name                = "law-${var.UNIQ_NAME}"
+resource "azurerm_log_analytics_workspace" "lawAdams" {
+  name                = "law${var.UNIQ_NAME}"
   location            = var.LOCATION
   resource_group_name = var.RESOURCE_GROUP_NAME
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }
 
-resource "azurerm_kubernetes_cluster" "aks" {
-  name                = "aks-${var.UNIQ_NAME}"
+resource "azurerm_kubernetes_cluster" "aksAdams" {
+  name                = "aks${var.UNIQ_NAME}"
   location            = var.LOCATION
   resource_group_name = var.RESOURCE_GROUP_NAME
   dns_prefix          = var.DNS_PREFIX
@@ -63,14 +69,14 @@ resource "azurerm_kubernetes_cluster" "aks" {
   addon_profile {
     oms_agent {
       enabled                    = true
-      log_analytics_workspace_id = azurerm_log_analytics_workspace.law.id
+      log_analytics_workspace_id = azurerm_log_analytics_workspace.lawAdams.id
     }
   }
 }
 
 # attach acr https://stackoverflow.com/questions/59978060/how-to-give-permissions-to-aks-to-access-acr-via-terraform
 resource "azurerm_role_assignment" "aks_to_acr" {
-  scope                = azurerm_container_registry.acr.id
+  scope                = azurerm_container_registry.acrAdams.id
   role_definition_name = "AcrPull"
-  principal_id         = azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
+  principal_id         = azurerm_kubernetes_cluster.aksAdams.kubelet_identity[0].object_id
 }
