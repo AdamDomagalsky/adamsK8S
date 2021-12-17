@@ -3,12 +3,12 @@
 name: Terraform
 
 # Controls when the workflow will run
-on:
+on: workflow_dispatch
   # Triggers the workflow on push or pull request events but only for the master branch
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  # push:
+  #   branches: [ master ]
+  # pull_request:
+  #   branches: [ master ]
 
 jobs:
   terraform:
@@ -65,6 +65,17 @@ jobs:
         tf_actions_subcommand: 'plan'
         tf_actions_working_dir: "./terraform/azure"
  
+
+# terraform import azurerm_resource_group.AZ-RG-MW-Sandbox-01 /subscriptions/6939ec6c-6633-41b1-bbd0-399e20260db0/resourceGroups/AZ-RG-MW-Sandbox-01
+
+    - name: Terraform Import
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_version: 0.14.8
+        tf_actions_subcommand: 'import'
+        args: "azurerm_resource_group.AZ-RG-MW-Sandbox-01 /subscriptions/6939ec6c-6633-41b1-bbd0-399e20260db0/resourceGroups/AZ-RG-MW-Sandbox-01"
+        tf_actions_working_dir: "./terraform/azure"
+
     - name: Terraform Apply
       # if: github.ref == 'refs/heads/main'
       uses: hashicorp/terraform-github-actions@master
