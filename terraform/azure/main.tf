@@ -4,7 +4,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "=2.65.0"
+      version = "=2.90.0"
     }
   }
 }
@@ -40,8 +40,6 @@ resource "azurerm_log_analytics_workspace" "law" {
   location            = var.LOCATION
   resource_group_name = var.RESOURCE_GROUP_NAME
 }
-
-
 
 resource "azurerm_kubernetes_cluster" "aks" {
   name                = "aks-${var.UNIQ_NAME}"
