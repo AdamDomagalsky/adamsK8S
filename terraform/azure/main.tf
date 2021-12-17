@@ -7,29 +7,51 @@ terraform {
       version = "=2.90.0"
     }
   }
+  backend "azurerm" {
+    resource_group_name  = var.RESOURCE_GROUP_NAME
+    storage_account_name = var.SA_ACCOUNT_NAME
+    container_name       = "tfstate"
+    key                  = "terraform.tfstate"
+
+  }
 }
 
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
-  skip_provider_registration = "true"
-  subscription_id            = var.AZURE_SUBSCRIPTION_ID
+  # skip_provider_registration = "true"
+  subscription_id = var.AZURE_SUBSCRIPTION_ID
 
   features {}
 }
-resource "azurerm_resource_group" "AZ-RG-MW-Sandbox-01" {
-  # (resource arguments)
-  name     = var.RESOURCE_GROUP_NAME
-  location = var.LOCATION
-  tags     = var.MAIN_TAGS
-  lifecycle {
-    ignore_changes = [tags]
-  }
-}
+
+## It's permanent, can not create on PG
+# resource "azurerm_resource_group" "AZ-RG-MW-Sandbox-01" {
+#   # (resource arguments)
+#   name     = var.RESOURCE_GROUP_NAME
+#   location = var.LOCATION
+#   tags     = var.MAIN_TAGS
+#   lifecycle {
+#     ignore_changes = [tags]
+#   }
+# }
+
 data "azurerm_resource_group" "rg" {
   name = var.RESOURCE_GROUP_NAME
 }
 data "azurerm_client_config" "current" {
 }
+
+## Need to move it b4 AKS as well as acr and law resources
+# resource "azurerm_storage_account" "saAdams" {
+#   name                     = var.SA_ACCOUNT_NAME
+#   resource_group_name      = var.RESOURCE_GROUP_NAME
+#   location                 = var.LOCATION
+#   account_tier             = "Standard"
+#   account_replication_type = "GRS"
+#   lifecycle {
+#     ignore_changes = [tags]
+#   }
+# }
 resource "azurerm_container_registry" "acrAdams" {
   name                = "acr${var.UNIQ_NAME}"
   resource_group_name = var.RESOURCE_GROUP_NAME

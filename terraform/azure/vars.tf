@@ -10,6 +10,10 @@ variable "LOCATION" {
   type = string
 }
 
+variable "SA_ACCOUNT_NAME" {
+  type = string
+}
+
 variable "DNS_PREFIX" {
   type = string
 }
