@@ -43,15 +43,6 @@ jobs:
         tf_actions_version: 0.14.8
         tf_actions_subcommand: 'fmt'
         tf_actions_working_dir: "./terraform/azure"
-
-    - name: Setup Terraform variables
-      working-directory: ./terraform/azure
-      id: vars
-      run: |-
-        cat > pipeline.auto.tfvars <<EOF
-        image_tag = "${{ github.sha }}"
-        SA_ACCOUNT_NAME = ${{ secrets.TF_VAR_SA_ACCOUNT_NAME }}
-        EOF
          
     - name: 'Terraform Init'
       uses: hashicorp/terraform-github-actions@master
@@ -77,9 +68,9 @@ jobs:
         tf_actions_version: 0.14.8
         tf_actions_subcommand: 'plan'
         tf_actions_working_dir: "./terraform/azure"
-      #   args: '-var SA_ACCOUNT_NAME=${{ secrets.TF_VAR_SA_ACCOUNT_NAME }}'
-      # env:
-      #   TF_VAR_SA_ACCOUNT_NAME: ${{ secrets.TF_VAR_SA_ACCOUNT_NAME }}
+        args: '-var SA_ACCOUNT_NAME=${{ secrets.TF_VAR_SA_ACCOUNT_NAME }}'
+      env:
+        TF_VAR_SA_ACCOUNT_NAME: ${{ secrets.TF_VAR_SA_ACCOUNT_NAME }}
 
 # terraform import azurerm_resource_group.AZ-RG-MW-Sandbox-01 /subscriptions/6939ec6c-6633-41b1-bbd0-399e20260db0/resourceGroups/AZ-RG-MW-Sandbox-01
 
@@ -98,6 +89,6 @@ jobs:
         tf_actions_version: 0.14.8
         tf_actions_subcommand: 'apply'
         tf_actions_working_dir: "./terraform/azure"
-        # args: '-var SA_ACCOUNT_NAME=${{ secrets.TF_VAR_SA_ACCOUNT_NAME }}'
-      # env:
-        # TF_VAR_SA_ACCOUNT_NAME: ${{ secrets.TF_VAR_SA_ACCOUNT_NAME }}
+        args: '-var SA_ACCOUNT_NAME=${{ secrets.TF_VAR_SA_ACCOUNT_NAME }}'
+      env:
+        TF_VAR_SA_ACCOUNT_NAME: ${{ secrets.TF_VAR_SA_ACCOUNT_NAME }}
