@@ -24,6 +24,7 @@ jobs:
       TF_VAR_LOCATION : ${{ secrets.TF_VAR_LOCATION }}
       TF_VAR_RESOURCE_GROUP_NAME : ${{ secrets.TF_VAR_RESOURCE_GROUP_NAME }}
       TF_VAR_UNIQ_NAME : ${{ secrets.TF_VAR_UNIQ_NAME }}
+      TF_VAR_SA_ACCOUNT_NAME: ${{ secrets.TF_VAR_SA_ACCOUNT_NAME }}
     runs-on: ubuntu-latest
     environment: production
  
@@ -69,7 +70,6 @@ jobs:
         tf_actions_subcommand: 'plan'
         tf_actions_working_dir: "./terraform/azure"
         args: '-var SA_ACCOUNT_NAME=${{ secrets.TF_VAR_SA_ACCOUNT_NAME }}'
-      env:
         TF_VAR_SA_ACCOUNT_NAME: ${{ secrets.TF_VAR_SA_ACCOUNT_NAME }}
 
 # terraform import azurerm_resource_group.AZ-RG-MW-Sandbox-01 /subscriptions/6939ec6c-6633-41b1-bbd0-399e20260db0/resourceGroups/AZ-RG-MW-Sandbox-01
