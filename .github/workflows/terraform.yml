@@ -105,9 +105,9 @@ jobs:
       run: echo ${{ steps.terraform.outputs.tf_actions_output }}
 
 
-    - uses: azure/k8s-set-context@v2
-      with:
-    method: service-principal
-    cluster-type: arc
-    cluster-name: <cluster-name>
-    resource-group: <resource-group>
+    # - uses: azure/k8s-set-context@v2
+    #   with:
+    # method: service-principal
+    # cluster-type: arc
+    # cluster-name: <cluster-name>
+    # resource-group: <resource-group>
