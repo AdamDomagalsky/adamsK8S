@@ -15,3 +15,11 @@ output "subscriptionid" {
 output "objectid" {
   value = data.azurerm_client_config.current.object_id
 }
+
+output "cluster_name" {
+  value = resource.azurerm_kubernetes_cluster.aksAdams.name
+}
+
+output "resource-group" {
+  value = var.RESOURCE_GROUP_NAME
+}
