@@ -24,14 +24,16 @@ jobs:
 
     steps:
 
-      - name: 'Az CLI login'
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    
+    - run: |
+        az webapp list --query "[?state=='Running']"
 
-      - uses: azure/k8s-set-context@v2
-        with:
-          method: service-principal
-          cluster-type: arc
-          cluster-name: "aksAdams"
-          resource-group: "AZ-RG-MW-Sandbox-01"
+      # - uses: azure/k8s-set-context@v2
+      #   with:
+      #     method: service-principal
+      #     cluster-type: arc
+      #     cluster-name: "aksAdams"
+      #     resource-group: "AZ-RG-MW-Sandbox-01"
