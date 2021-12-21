@@ -12,7 +12,6 @@ terraform {
     storage_account_name = var.SA_ACCOUNT_NAME
     container_name       = "tfstate"
     key                  = "terraform.tfstate"
-
   }
 }
 
@@ -20,7 +19,6 @@ terraform {
 provider "azurerm" {
   # skip_provider_registration = "true"
   subscription_id = var.AZURE_SUBSCRIPTION_ID
-
   features {}
 }
 

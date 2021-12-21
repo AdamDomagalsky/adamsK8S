@@ -1,0 +1,28 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Flux
+
+# Controls when the workflow will run
+on: workflow_dispatch
+  # Triggers the workflow on push or pull request events but only for the master branch
+  # push:
+  #   branches: [ master ]
+  # pull_request:
+  #   branches: [ master ]
+
+jobs:
+  flux:
+    name: "Flex"
+    runs-on: ubuntu-latest
+    environment: prod
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - uses: azure/k8s-set-context@v2
+        with:
+          method: service-principal
+          cluster-type: arc
+          cluster-name: "aksAdams"
+          resource-group: ${{ secrets.TF_VAR_RESOURCE_GROUP_NAME }}
