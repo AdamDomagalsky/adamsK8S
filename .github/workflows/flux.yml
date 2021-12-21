@@ -25,4 +25,4 @@ jobs:
           method: service-principal
           cluster-type: arc
           cluster-name: "aksAdams"
-          resource-group: ${{ secrets.TF_VAR_RESOURCE_GROUP_NAME }}
+          resource-group: "AZ-RG-MW-Sandbox-01"
