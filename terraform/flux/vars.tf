@@ -38,3 +38,8 @@ variable "RESOURCE_GROUP_NAME" {
 variable "SA_ACCOUNT_NAME" {
   type = string
 }
+
+variable "KUBECONFIG" {
+  type = string
+  # default = "~/.kube/config"
+}

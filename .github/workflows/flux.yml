@@ -40,7 +40,7 @@ jobs:
         az account show
         az group list
         pwd
-        ls -al
+        ls -al $KUBECONFIG
 
 
     - name: 'Terraform Init'
@@ -48,7 +48,7 @@ jobs:
       with:
         tf_actions_version: 0.14.8
         tf_actions_subcommand: 'init'
-        tf_actions_working_dir: "./terraform/flux"
+        tf_actions_working_dir: "terraform/flux"
         args: '-backend-config "storage_account_name=${{ secrets.TF_VAR_SA_ACCOUNT_NAME }}" -backend-config "resource_group_name=${{ secrets.TF_VAR_RESOURCE_GROUP_NAME }}"'
       env:
         TF_VAR_SA_ACCOUNT_NAME: ${{ secrets.TF_VAR_SA_ACCOUNT_NAME }}
@@ -59,7 +59,7 @@ jobs:
       with:
         tf_actions_version: 0.14.8
         tf_actions_subcommand: 'plan'
-        tf_actions_working_dir: "./terraform/flux"
-        args: '-var SA_ACCOUNT_NAME=${{ secrets.TF_VAR_SA_ACCOUNT_NAME }}'
+        tf_actions_working_dir: "terraform/flux"
+        args: '-var SA_ACCOUNT_NAME=${{ secrets.TF_VAR_SA_ACCOUNT_NAME }}  -var KUBECONFIG=$KUBECONFIG'
         TF_VAR_SA_ACCOUNT_NAME: ${{ secrets.TF_VAR_SA_ACCOUNT_NAME }}
 
