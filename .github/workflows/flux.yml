@@ -23,6 +23,15 @@ jobs:
         shell: bash
 
     steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: 'Terraform Format'
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_version: 0.14.8
+        tf_actions_subcommand: 'fmt'
+        tf_actions_working_dir: "./terraform/azure"
     # - name: 'Az CLI login'
     #   uses: azure/login@v1
     #   with:
@@ -53,6 +62,13 @@ jobs:
       env:
         TF_VAR_SA_ACCOUNT_NAME: ${{ secrets.TF_VAR_SA_ACCOUNT_NAME }}
         TF_VAR_RESOURCE_GROUP_NAME: ${{ secrets.TF_VAR_RESOURCE_GROUP_NAME }}
+
+    - name: 'Terraform Validate'
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_version: 0.14.8
+        tf_actions_subcommand: 'validate'
+        tf_actions_working_dir: "./terraform/azure"
 
     - name: 'Terraform Plan'
       uses: hashicorp/terraform-github-actions@master
