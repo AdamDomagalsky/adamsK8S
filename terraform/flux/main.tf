@@ -22,6 +22,10 @@ terraform {
       source  = "hashicorp/tls"
       version = "3.1.0"
     }
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "=2.90.0"
+    }
 
   }
   # terraform init -backend-config "storage_account_name=saadams" -backend-config "resource_group_name=AZ-RG-MW-Sandbox-01"

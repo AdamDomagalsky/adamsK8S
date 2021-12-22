@@ -41,7 +41,7 @@ variable "SA_ACCOUNT_NAME" {
 
 variable "KUBECONFIG" {
   type = string
-  # default = "~/.kube/config"
+  default = "~/.kube/config"
 }
 
 variable "AZURE_SUBSCRIPTION_ID" {
