@@ -38,7 +38,7 @@ provider "flux" {}
 provider "kubectl" {}
 
 provider "kubernetes" {
-  config_path = "~/.kube/config"
+   config_path = "~/.kube/config"
 }
 
 provider "github" {
