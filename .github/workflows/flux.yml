@@ -31,7 +31,7 @@ jobs:
       with:
         tf_actions_version: 0.14.8
         tf_actions_subcommand: 'fmt'
-        tf_actions_working_dir: "./terraform/azure"
+        tf_actions_working_dir: "./terraform/flux"
     # - name: 'Az CLI login'
     #   uses: azure/login@v1
     #   with:
