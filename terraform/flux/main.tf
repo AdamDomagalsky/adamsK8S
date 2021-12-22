@@ -33,6 +33,12 @@ terraform {
   }
 }
 
+provider "azurerm" {
+  # skip_provider_registration = "true"
+  subscription_id = var.AZURE_SUBSCRIPTION_ID
+  features {}
+}
+
 provider "flux" {}
 
 provider "kubectl" {}

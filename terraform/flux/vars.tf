@@ -43,3 +43,7 @@ variable "KUBECONFIG" {
   type = string
   # default = "~/.kube/config"
 }
+
+variable "AZURE_SUBSCRIPTION_ID" {
+  type = string
+}
