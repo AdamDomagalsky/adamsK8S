@@ -29,12 +29,12 @@ terraform {
 
   }
   # terraform init -backend-config "storage_account_name=saadams" -backend-config "resource_group_name=AZ-RG-MW-Sandbox-01"
-  backend "azurerm" {
-    resource_group_name  = var.RESOURCE_GROUP_NAME
-    storage_account_name = var.SA_ACCOUNT_NAME
-    container_name       = "tfstate"
-    key                  = "terraformAKSFlux.tfstate"
-  }
+  #backend "azurerm" {
+   # resource_group_name  = var.RESOURCE_GROUP_NAME
+    #storage_account_name = var.SA_ACCOUNT_NAME
+    #container_name       = "tfstate"
+    #key                  = "terraformAKSFlux.tfstate"
+  #}
 }
 
 provider "azurerm" {

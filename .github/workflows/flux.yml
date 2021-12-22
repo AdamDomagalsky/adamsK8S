@@ -56,7 +56,7 @@ jobs:
         tf_actions_version: 0.14.8
         tf_actions_subcommand: 'init'
         tf_actions_working_dir: "./terraform/flux"
-        args: '-backend-config "storage_account_name=${{ secrets.TF_VAR_SA_ACCOUNT_NAME }}" -backend-config "resource_group_name=${{ secrets.TF_VAR_RESOURCE_GROUP_NAME }}"'
+        # args: '-backend-config "storage_account_name=${{ secrets.TF_VAR_SA_ACCOUNT_NAME }}" -backend-config "resource_group_name=${{ secrets.TF_VAR_RESOURCE_GROUP_NAME }}"'
       # env:
       #   TF_VAR_SA_ACCOUNT_NAME: ${{ secrets.TF_VAR_SA_ACCOUNT_NAME }}
       #   TF_VAR_RESOURCE_GROUP_NAME: ${{ secrets.TF_VAR_RESOURCE_GROUP_NAME }}
