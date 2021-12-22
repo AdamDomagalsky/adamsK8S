@@ -25,30 +25,7 @@ jobs:
         shell: bash
 
     steps:
-      - name: 'Az CLI login'
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-          enable-AzPSSession: true 
-
-  
-      - name: 'Run az commands'
-        run: |
-          az account show
-          az group list
-          pwd 
-
-      - uses: azure/k8s-set-context@v2
-        with:
-          method: service-principal
-          cluster-type: arc
-          cluster-name: "aksadams"
-          resource-group: "AZ-RG-MW-Sandbox-01"
-
-
-      - uses: azure/k8s-set-context@v2
-        with:
-          method: service-principal
-          cluster-type: arc
-          cluster-name: "aksadams"
-          resource-group: ${{ secrets.TF_VAR_RESOURCE_GROUP_NAME }}
+    - uses: azure/k8s-set-context@v2
+      with:
+        method: kubeconfig
+        kubeconfig: ${{ secrets.KUBE_CONFIG }}
