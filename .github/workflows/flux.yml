@@ -40,5 +40,5 @@ jobs:
         az account show
         az group list
         pwd
-        ls
+        ls -al
 
