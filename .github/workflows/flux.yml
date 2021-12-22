@@ -16,23 +16,23 @@ jobs:
   flux:
     name: "Flex"
     runs-on: ubuntu-latest
-    env:
-      ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
-    #   ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
-    #   ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+    # env:
+      # ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
     defaults:
       run:
         shell: bash
 
     steps:
-
     - uses: azure/k8s-set-context@v2
       with:
         method: service-account
         k8s-url: ${{ secrets.K8S_URL }}                                                                                                                           
         k8s-secret: ${{ secrets.K8S_SECRET }}
+      
+    - name: 'Run az commands'
+      run: |
+        az account show
+        az group list
+        pwd
+        cat ~/.kube/config
 
-    - uses: azure/k8s-set-context@v2
-      with:
-        method: kubeconfig
-        kubeconfig: ${{ secrets.KUBE_CONFIG }}
