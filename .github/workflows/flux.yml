@@ -23,24 +23,24 @@ jobs:
         shell: bash
 
     steps:
-    - name: 'Az CLI login'
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-        enable-AzPSSession: true 
+    # - name: 'Az CLI login'
+    #   uses: azure/login@v1
+    #   with:
+    #     creds: ${{ secrets.AZURE_CREDENTIALS }}
+    #     enable-AzPSSession: true 
 
-    - uses: azure/k8s-set-context@v2
-      with:
-        method: service-account
-        k8s-url: ${{ secrets.K8S_URL }}                                                                                                                           
-        k8s-secret: ${{ secrets.K8S_SECRET }}
+    # - uses: azure/k8s-set-context@v2
+    #   with:
+    #     method: service-account
+    #     k8s-url: ${{ secrets.K8S_URL }}                                                                                                                           
+    #     k8s-secret: ${{ secrets.K8S_SECRET }}
       
-    - name: 'Run az commands'
-      run: |
-        az account show
-        az group list
-        pwd
-        ls -al $KUBECONFIG
+    # - name: 'Run az commands'
+    #   run: |
+    #     az account show
+    #     az group list
+    #     pwd
+    #     ls -al $KUBECONFIG
 
 
     - name: 'Terraform Init'
@@ -48,7 +48,7 @@ jobs:
       with:
         tf_actions_version: 0.14.8
         tf_actions_subcommand: 'init'
-        tf_actions_working_dir: "terraform/flux"
+        tf_actions_working_dir: "./terraform/flux"
         args: '-backend-config "storage_account_name=${{ secrets.TF_VAR_SA_ACCOUNT_NAME }}" -backend-config "resource_group_name=${{ secrets.TF_VAR_RESOURCE_GROUP_NAME }}"'
       env:
         TF_VAR_SA_ACCOUNT_NAME: ${{ secrets.TF_VAR_SA_ACCOUNT_NAME }}
