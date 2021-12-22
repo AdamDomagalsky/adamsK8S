@@ -50,5 +50,5 @@ jobs:
         with:
           method: service-principal
           cluster-type: arc
-          cluster-name: "aksAdams"
+          cluster-name: "aksadams"
           resource-group: ${{ secrets.TF_VAR_RESOURCE_GROUP_NAME }}
