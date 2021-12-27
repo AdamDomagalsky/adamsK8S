@@ -24,11 +24,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    # - name: 'Az CLI login'
-    #   uses: azure/login@v1
-    #   with:
-    #     creds: ${{ secrets.AZURE_CREDENTIALS }}
-    #     enable-AzPSSession: true 
+    - name: 'Az CLI login'
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        enable-AzPSSession: true 
 
     # - uses: azure/k8s-set-context@v2
     #   with:
@@ -36,12 +36,12 @@ jobs:
     #     k8s-url: ${{ secrets.K8S_URL }}                                                                                                                           
     #     k8s-secret: ${{ secrets.K8S_SECRET }}
       
-    # - name: 'Run az commands'
-    #   run: |
-    #     az account show
-    #     az group list
-    #     pwd
-    #     ls -al $KUBECONFIG
+    - name: 'Run az commands'
+      run: |
+        az account show
+        az group list
+        pwd
+        ls -al $KUBECONFIG
 
     # - name: 'Terraform Format'
     #   uses: hashicorp/terraform-github-actions@master
