@@ -1,3 +1,6 @@
 OLD*
 .DS_Store
 secret.md
+*.tfvars
+*.tfstate*
+terraform/k8s/.terraform/providers/*
